@@ -37,6 +37,7 @@ namespace Tila_Scanner
             this.TokenConvertBtn = new System.Windows.Forms.Button();
             this.InputTxt = new System.Windows.Forms.TextBox();
             this.Inputlbl = new System.Windows.Forms.Label();
+            this.AutoBtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -73,6 +74,7 @@ namespace Tila_Scanner
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.AutoBtn);
             this.panel2.Controls.Add(this.SyntaxBtn);
             this.panel2.Controls.Add(this.TokenConvertBtn);
             this.panel2.Controls.Add(this.InputTxt);
@@ -111,6 +113,7 @@ namespace Tila_Scanner
             this.InputTxt.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.InputTxt.Size = new System.Drawing.Size(404, 181);
             this.InputTxt.TabIndex = 1;
+            this.InputTxt.TextChanged += new System.EventHandler(this.InputTxt_TextChanged);
             // 
             // Inputlbl
             // 
@@ -120,6 +123,16 @@ namespace Tila_Scanner
             this.Inputlbl.Size = new System.Drawing.Size(31, 13);
             this.Inputlbl.TabIndex = 0;
             this.Inputlbl.Text = "Input";
+            // 
+            // AutoBtn
+            // 
+            this.AutoBtn.Location = new System.Drawing.Point(652, 113);
+            this.AutoBtn.Name = "AutoBtn";
+            this.AutoBtn.Size = new System.Drawing.Size(136, 65);
+            this.AutoBtn.TabIndex = 4;
+            this.AutoBtn.Text = "Enable AutoSyntaxAnalyzer";
+            this.AutoBtn.UseVisualStyleBackColor = true;
+            this.AutoBtn.Click += new System.EventHandler(this.AutoBtn_Click);
             // 
             // Form1
             // 
@@ -148,6 +161,7 @@ namespace Tila_Scanner
         private System.Windows.Forms.Button TokenConvertBtn;
         private System.Windows.Forms.TextBox OutputTxt;
         private System.Windows.Forms.Button SyntaxBtn;
+        private System.Windows.Forms.Button AutoBtn;
     }
 }
 

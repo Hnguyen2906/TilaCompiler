@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Tila_Scanner
@@ -69,6 +71,63 @@ namespace Tila_Scanner
                 }
             }
             catch(Exception ex)
+            {
+                OutputTxt.Text = ex.Message;
+            }
+        }
+
+        private void AutoBtn_Click(object sender, EventArgs e)
+        {
+            if (AutoBtn.Text == "Enable AutoSyntaxAnalyzer")
+            {
+                AutoBtn.Text = "Disable AutoSyntaxAnalyzer";
+                TokenConvertBtn.Enabled = false;
+                SyntaxBtn.Enabled = false;
+            }
+            else
+            {
+                AutoBtn.Text = "Enable AutoSyntaxAnalyzer";
+                TokenConvertBtn.Enabled = false;
+                SyntaxBtn.Enabled = false;
+            }
+        }
+
+        private void InputTxt_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DoAnalyzeCode()
+        {
+            try
+            {
+                Thread thread = new Thread(new ThreadStart(AnalyzeCode));
+            }
+            catch(Exception ex)
+            {
+
+            }
+        }
+
+        private void AnalyzeCode()
+        {
+            try
+            {
+                TilaScanner scanner = new TilaScanner(InputTxt.Text);
+
+                var outputStream = scanner.ConvertToTokenStream();
+
+                TilaParser parser = new TilaParser(outputStream);
+                if (parser.NoSyntaxErrors())
+                {
+                    OutputTxt.Text = "No syntax errors!";
+                }
+                else
+                {
+                    OutputTxt.Text = "Syntax error(s) detected!";
+                }
+            }
+            catch (Exception ex)
             {
                 OutputTxt.Text = ex.Message;
             }
