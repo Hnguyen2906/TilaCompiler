@@ -79,7 +79,7 @@ namespace Tila_Scanner
                 return new Token(TokenType.RPAREN, ")");
             }
 
-            if (_input[_position] == ' ' || _input[_position] == '\r' || _input[_position] == '\n')
+            if (_input[_position] == ' ' || _input[_position] == '\r' || _input[_position] == '\n' || _input[_position] == '\t')
             {
                 _position++;
                 return new Token(TokenType.SPACE, " ");

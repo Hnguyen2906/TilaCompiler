@@ -88,15 +88,15 @@ namespace Tila_Scanner
             {
                 if (tokens[i].Type == TokenType.EOS)
                 {
-                    if (IsWhile(tokens[prevIndex + 1]) && prevIndex != 0)
-                    {
-                        if (IsEnd(tokens[i - 1])
-                            && tokens[i - 2].Type == TokenType.EOS)
-                        {
-                            continue;
-                        }
-                    }
-                    else if (IsWhile(tokens[prevIndex]) && prevIndex == 0)
+                    //if (IsWhile(tokens[prevIndex + 1]) && prevIndex != 0)
+                    //{
+                    //    if (IsEnd(tokens[i - 1])
+                    //        && tokens[i - 2].Type == TokenType.EOS)
+                    //    {
+                    //        continue;
+                    //    }
+                    //}
+                    if (IsWhile(tokens[prevIndex]))
                     {
                         if (IsEnd(tokens[i - 1])
                            && tokens[i - 2].Type == TokenType.EOS)

@@ -8,16 +8,19 @@ namespace Tila_Scanner
         public Form1()
         {
             InitializeComponent();
-            //InputTxt.Text = "begin int abc; abc = (a - 1); end";
-            //InputTxt.Text = "begin int abc; abc = (a - 1); while x = 1 do begin x = 2; end; end";
-            InputTxt.Text = "begin " +
-                                "while 1 " +
-                                    "do " +
-                                    "begin " +
-                                        "x = 2; " +
-                                        "x = 3 " +
-                                    "end; " +
-                            "end";
+            //default statements
+            InputTxt.Text = @"  
+                                begin 
+                                    int abc; 
+                                    abc = (a - 1); 
+                                    while x - 1 
+                                        do 
+                                        begin 
+                                            x = 2; 
+                                        end; 
+
+                                    print x - 1; 
+                                end";
         }
 
         private void TokenConvertBtn_Click(object sender, EventArgs e)
@@ -38,6 +41,7 @@ namespace Tila_Scanner
                 }
 
                 OutputTxt.Text = output.Trim();
+                OutputTxt.Text += "\r\n----------------------------------------";
                 OutputTxt.Text += additionalText;
             }
             catch (Exception ex)
