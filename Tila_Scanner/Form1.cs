@@ -119,23 +119,10 @@ namespace Tila_Scanner
 
                 try
                 {
-                    if (task != null || (task != null && task.IsCanceled))
-                    {
-                        if (task.IsCompleted)
-                        {
-                            task = Task.Run(() => { AnalyzeCode(); _tokenSource.Token.ThrowIfCancellationRequested(); }, _tokenSource.Token);
-                        }
-                        else
-                        {
-                            task.Start();
-                        }
-                    }
-                    else
-                    {
-                        task = Task.Run(() => { AnalyzeCode(); _tokenSource.Token.ThrowIfCancellationRequested(); }, _tokenSource.Token);
-                    }
+                    _tokenSource = new CancellationTokenSource();
+                    task = Task.Run(() => { AnalyzeCode(); _tokenSource.Token.ThrowIfCancellationRequested(); }, _tokenSource.Token);
                 }
-                catch
+                catch(Exception ex)
                 {
                 }
             }
