@@ -10,6 +10,8 @@ namespace Tila_Scanner
         private Thread _thread;
         private bool isNeedToAnalyze = false;
         private System.Timers.Timer timer;
+        private CancellationTokenSource _tokenSource = new CancellationTokenSource();
+        private Task task;
 
         public Form1()
         {
@@ -110,19 +112,34 @@ namespace Tila_Scanner
         {
             try
             {
-                if (_thread != null)
+                if (task != null && !task.IsCompleted)
                 {
-                    if (_thread.IsAlive)
+                    _tokenSource.Cancel();
+                }
+
+                try
+                {
+                    if (task != null || (task != null && task.IsCanceled))
                     {
-                        _thread.Abort();
+                        if (task.IsCompleted)
+                        {
+                            task = Task.Run(() => { AnalyzeCode(); _tokenSource.Token.ThrowIfCancellationRequested(); }, _tokenSource.Token);
+                        }
+                        else
+                        {
+                            task.Start();
+                        }
+                    }
+                    else
+                    {
+                        task = Task.Run(() => { AnalyzeCode(); _tokenSource.Token.ThrowIfCancellationRequested(); }, _tokenSource.Token);
                     }
                 }
-              
-                _thread = new Thread(new ThreadStart(AnalyzeCode));
-                _thread.IsBackground = true;
-                _thread.Start();
+                catch
+                {
+                }
             }
-            catch(Exception ex)
+            catch
             {
 
             }
@@ -139,16 +156,16 @@ namespace Tila_Scanner
                 TilaParser parser = new TilaParser(outputStream);
                 if (parser.NoSyntaxErrors())
                 {
-                    OutputTxt.Text = "No syntax errors!";
+                    OutputTxt.Invoke(new MethodInvoker(delegate { OutputTxt.Text = "No syntax errors!"; }));
                 }
                 else
                 {
-                    OutputTxt.Text = "Syntax error(s) detected!";
+                    OutputTxt.Invoke(new MethodInvoker(delegate { OutputTxt.Text = "Syntax error(s) detected!"; }));
                 }
             }
             catch (Exception ex)
             {
-                OutputTxt.Text = ex.Message;
+                OutputTxt.Invoke(new MethodInvoker(delegate { OutputTxt.Text = ex.Message; }));
             }
         }
     }
