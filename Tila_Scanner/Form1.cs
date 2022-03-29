@@ -7,6 +7,10 @@ namespace Tila_Scanner
 {
     public partial class Form1 : Form
     {
+        private Thread _thread;
+        private bool isNeedToAnalyze = false;
+        private System.Timers.Timer timer;
+
         public Form1()
         {
             InitializeComponent();
@@ -83,25 +87,40 @@ namespace Tila_Scanner
                 AutoBtn.Text = "Disable AutoSyntaxAnalyzer";
                 TokenConvertBtn.Enabled = false;
                 SyntaxBtn.Enabled = false;
+                isNeedToAnalyze = true;
             }
             else
             {
                 AutoBtn.Text = "Enable AutoSyntaxAnalyzer";
                 TokenConvertBtn.Enabled = false;
                 SyntaxBtn.Enabled = false;
+                isNeedToAnalyze = false;
             }
         }
 
         private void InputTxt_TextChanged(object sender, EventArgs e)
         {
-
+            if (isNeedToAnalyze)
+            {
+                DoAnalyzeCode();
+            }
         }
 
         private void DoAnalyzeCode()
         {
             try
             {
-                Thread thread = new Thread(new ThreadStart(AnalyzeCode));
+                if (_thread != null)
+                {
+                    if (_thread.IsAlive)
+                    {
+                        _thread.Abort();
+                    }
+                }
+              
+                _thread = new Thread(new ThreadStart(AnalyzeCode));
+                _thread.IsBackground = true;
+                _thread.Start();
             }
             catch(Exception ex)
             {
