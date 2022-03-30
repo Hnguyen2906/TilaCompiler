@@ -7,10 +7,8 @@ namespace Tila_Scanner
 {
     public partial class Form1 : Form
     {
-        private Thread _thread;
         private bool isNeedToAnalyze = false;
-        private System.Timers.Timer timer;
-        private CancellationTokenSource _tokenSource = new CancellationTokenSource();
+        private CancellationTokenSource _tokenSource;
         private Task task;
 
         public Form1()
@@ -120,9 +118,13 @@ namespace Tila_Scanner
                 try
                 {
                     _tokenSource = new CancellationTokenSource();
-                    task = Task.Run(() => { AnalyzeCode(); _tokenSource.Token.ThrowIfCancellationRequested(); }, _tokenSource.Token);
+                    task = Task.Run(() => 
+                                        {
+                                            AnalyzeCode(); 
+                                            _tokenSource.Token.ThrowIfCancellationRequested(); 
+                                        }, _tokenSource.Token);
                 }
-                catch(Exception ex)
+                catch
                 {
                 }
             }

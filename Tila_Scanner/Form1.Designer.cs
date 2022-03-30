@@ -33,11 +33,11 @@ namespace Tila_Scanner
             this.panel3 = new System.Windows.Forms.Panel();
             this.OutputTxt = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.AutoBtn = new System.Windows.Forms.Button();
             this.SyntaxBtn = new System.Windows.Forms.Button();
             this.TokenConvertBtn = new System.Windows.Forms.Button();
             this.InputTxt = new System.Windows.Forms.TextBox();
             this.Inputlbl = new System.Windows.Forms.Label();
-            this.AutoBtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -85,6 +85,16 @@ namespace Tila_Scanner
             this.panel2.Size = new System.Drawing.Size(800, 256);
             this.panel2.TabIndex = 2;
             // 
+            // AutoBtn
+            // 
+            this.AutoBtn.Location = new System.Drawing.Point(652, 113);
+            this.AutoBtn.Name = "AutoBtn";
+            this.AutoBtn.Size = new System.Drawing.Size(136, 65);
+            this.AutoBtn.TabIndex = 4;
+            this.AutoBtn.Text = "Enable AutoSyntaxAnalyzer";
+            this.AutoBtn.UseVisualStyleBackColor = true;
+            this.AutoBtn.Click += new System.EventHandler(this.AutoBtn_Click);
+            // 
             // SyntaxBtn
             // 
             this.SyntaxBtn.Location = new System.Drawing.Point(652, 66);
@@ -123,16 +133,6 @@ namespace Tila_Scanner
             this.Inputlbl.Size = new System.Drawing.Size(31, 13);
             this.Inputlbl.TabIndex = 0;
             this.Inputlbl.Text = "Input";
-            // 
-            // AutoBtn
-            // 
-            this.AutoBtn.Location = new System.Drawing.Point(652, 113);
-            this.AutoBtn.Name = "AutoBtn";
-            this.AutoBtn.Size = new System.Drawing.Size(136, 65);
-            this.AutoBtn.TabIndex = 4;
-            this.AutoBtn.Text = "Enable AutoSyntaxAnalyzer";
-            this.AutoBtn.UseVisualStyleBackColor = true;
-            this.AutoBtn.Click += new System.EventHandler(this.AutoBtn_Click);
             // 
             // Form1
             // 
